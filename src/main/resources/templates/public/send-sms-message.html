@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html layout:decorator="layouts/layout">
+	<head>
+		<title th:text="#{public.send-sms-message.title}"></title>
+	</head>
+	<body>
+		<div layout:fragment="content" class="pt-5 pb-5">
+			<section class="person">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-lg-12">
+							<div id="send-sms-card" class="card">
+								<div class="card-header d-flex align-items-center">
+									<h3 th:text="#{public.send-sms-message.title}" />
+								</div>
+								<div class="card-body">
+									<form class="form-horizontal" role="form"
+										th:action="@{${T(com.javarepository.smssenderwebapp.controller.ControllerMappings.Public).INDEX}}"
+										th:object="${smsSendForm}" method="post">
+										<div class="row">
+											<div class="col-sm-6">
+												<div
+													th:class="${#fields.hasErrors('fromMobile')} ? 'form-group has-danger' : 'form-group'">
+													<label for="fromMobile" class="form-control-label"
+														th:text="#{public.send-sms-message.fromMobile}" /> <input type="text"
+														th:field="*{fromMobile}"
+														th:placeholder="#{public.send-sms-message.fromMobile}"
+														class="form-control" />
+													<div th:if="${#fields.hasErrors('fromMobile')}">
+														<small class="form-text text-danger"
+															th:errors="*{fromMobile}" />
+													</div>
+												</div>
+											</div>
+	
+											<div class="col-sm-6">
+												<div
+													th:class="${#fields.hasErrors('toMobile')} ? 'form-group has-danger' : 'form-group'">
+													<label for="toMobile" class="form-control-label"
+														th:text="#{public.send-sms-message.toMobile}" /> <input type="text"
+														th:field="*{toMobile}"
+														th:placeholder="#{public.send-sms-message.toMobile}"
+														class="form-control" />
+													<div th:if="${#fields.hasErrors('toMobile')}">
+														<small class="form-text text-danger"
+															th:errors="*{toMobile}" />
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-sm-12">
+												<div
+													th:class="${#fields.hasErrors('message')} ? 'form-group has-danger' : 'form-group'">
+													<label for="message" class="form-control-label"
+														th:text="#{public.send-sms-message.message}" /> <textarea
+														th:field="*{message}"
+														th:placeholder="#{public.send-sms-message.message}"
+														class="form-control" />
+													<div th:if="${#fields.hasErrors('message')}">
+														<small class="form-text text-danger"
+															th:errors="*{message}" />
+													</div>
+												</div>
+											</div>
+										</div>
+	
+										<div class="controls">
+											<button type="submit" class="btn btn-success"
+												th:title="#{public.send-sms-message.send}"
+												th:text="#{public.send-sms-message.send}" />
+										</div>
+									</form>
+								</div>
+							</div>
+
+						</div>
+					</div>
+				</div>
+			</section>
+		</div>
+	</body>
+</html>
